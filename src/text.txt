@@ -1,0 +1,120 @@
+// import React, { useState } from "react";
+
+// export default function App() {
+//   const [page, setPage] = useState("dashboard");
+
+//   const Card = ({ children }) => (
+//     <div className="border rounded-lg shadow p-4 bg-white">{children}</div>
+//   );
+
+//   const CardContent = ({ children }) => <div className="mt-2">{children}</div>;
+
+//   const Button = ({ children, ...props }) => (
+//     <button
+//       className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
+//       {...props}
+//     >
+//       {children}
+//     </button>
+//   );
+
+//   return (
+//     <div className="p-6 grid gap-6 max-w-3xl mx-auto">
+//       <h1 className="text-3xl font-bold text-center">Placement Prep App</h1>
+
+//       {/* Navigation */}
+//       <div className="flex gap-3 justify-center flex-wrap">
+//         <Button onClick={() => setPage("dashboard")}>Dashboard</Button>
+//         <Button onClick={() => setPage("quiz")}>Quizzes</Button>
+//         <Button onClick={() => setPage("essay")}>Essay Writing</Button>
+//         <Button onClick={() => setPage("readSpeak")}>Read & Speak</Button>
+//         <Button onClick={() => setPage("speakSpeak")}>Speak & Speak</Button>
+//         <Button onClick={() => setPage("leaderboard")}>Leaderboard</Button>
+//       </div>
+
+//       {/* Dashboard */}
+//       {page === "dashboard" && (
+//         <Card>
+//           <CardContent>
+//             <h2 className="text-xl font-semibold">Your Placement Activities</h2>
+//             <ul className="list-disc pl-6 mt-3 space-y-2">
+//               <li>Take <span className="font-medium">Quizzes</span> to test aptitude & technical skills.</li>
+//               <li>Practice <span className="font-medium">Essay Writing</span> for communication improvement.</li>
+//               <li><span className="font-medium">Read & Speak</span> passages for fluency.</li>
+//               <li><span className="font-medium">Speak & Speak</span> for interview mock answers.</li>
+//               <li>Check your <span className="font-medium">Leaderboard</span> rank.</li>
+//             </ul>
+//           </CardContent>
+//         </Card>
+//       )}
+
+//       {/* Quizzes */}
+//       {page === "quiz" && (
+//         <Card>
+//           <CardContent>
+//             <h2 className="text-lg font-semibold">Quizzes</h2>
+//             <p className="mt-2">MCQ based practice quizzes will appear here.</p>
+//           </CardContent>
+//         </Card>
+//       )}
+
+//       {/* Essay Writing */}
+//       {page === "essay" && (
+//         <Card>
+//           <CardContent>
+//             <h2 className="text-lg font-semibold">Essay Writing</h2>
+//             <textarea
+//               className="w-full mt-3 p-3 border rounded-lg"
+//               placeholder="Write your essay here..."
+//               rows={6}
+//             ></textarea>
+//             <Button className="mt-3">Submit Essay</Button>
+//           </CardContent>
+//         </Card>
+//       )}
+
+//       {/* Read & Speak */}
+//       {page === "readSpeak" && (
+//         <Card>
+//           <CardContent>
+//             <h2 className="text-lg font-semibold">Read & Speak</h2>
+//             <p className="mt-2">Read the passage below and speak into the mic:</p>
+//             <blockquote className="mt-3 p-3 bg-gray-100 rounded">
+//               "Success in placement requires practice, confidence, and clarity of thought."
+//             </blockquote>
+//             <Button className="mt-3">Start Speaking</Button>
+//           </CardContent>
+//         </Card>
+//       )}
+
+//       {/* Speak & Speak */}
+//       {page === "speakSpeak" && (
+//         <Card>
+//           <CardContent>
+//             <h2 className="text-lg font-semibold">Speak & Speak</h2>
+//             <p className="mt-2">Answer the interview-style question:</p>
+//             <blockquote className="mt-3 p-3 bg-gray-100 rounded">
+//               "Tell me about a time when you solved a difficult problem."
+//             </blockquote>
+//             <Button className="mt-3">Start Speaking</Button>
+//           </CardContent>
+//         </Card>
+//       )}
+
+//       {/* Leaderboard */}
+//       {page === "leaderboard" && (
+//         <Card>
+//           <CardContent>
+//             <h2 className="text-lg font-semibold">Leaderboard</h2>
+//             <ul className="mt-3 list-decimal pl-6 space-y-1">
+//               <li>Yash – 120 pts</li>
+//               <li>Ananya – 110 pts</li>
+//               <li>Ravi – 98 pts</li>
+//               <li>Priya – 95 pts</li>
+//             </ul>
+//           </CardContent>
+//         </Card>
+//       )}
+//     </div>
+//   );
+// }
