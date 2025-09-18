@@ -1,64 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
-import { RxDashboard } from "react-icons/rx";
-import { LuUserRoundPen } from "react-icons/lu";
-import { BsPersonVideo3 } from "react-icons/bs";
-import { LuHistory } from "react-icons/lu";
-import { AiOutlineTeam } from "react-icons/ai";
-import { CiLogout } from "react-icons/ci";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { MdContentPaste } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { LuTableOfContents } from "react-icons/lu";
+import { TbReportSearch } from "react-icons/tb";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 const MainLayout = () => {
+  const [active, setActive] = useState("dashboard");
+
   return (
-    <div>
-      <div className="sidebar">
-        <div className="user-information">
-          <img
-            src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
-            alt="img"
-          />
-          <div>
-            <h6>Yash Rajoriya</h6>
-            <p>Student</p>
-          </div>
+    <div className="main-container">
+      <div className="main-container-1">
+        <div className="logo-info">
+          <span>
+            <MdOutlineAdminPanelSettings className="logo-icon" />
+          </span>
+          Admin
         </div>
-        <Link to="/admin">
-          <i className="bi bi-speedometer2 me-2">
-            <RxDashboard />
-          </i>{" "}
-          Dashboard
-        </Link>
-        <Link to="profile">
-          <i className="bi bi-person me-2">
-            <LuUserRoundPen />
-          </i>{" "}
-          Profile
-        </Link>
-        <Link to="interviews">
-          <i className="bi bi-journal-text me-2">
-            <BsPersonVideo3 />
-          </i>{" "}
-          My Interviews
-        </Link>
-        <Link to="history">
-          <i className="bi bi-clock-history me-2">
-            <LuHistory />
-          </i>{" "}
-          History
-        </Link>
-        <Link to="team">
-          <i className="bi bi-people me-2">
-            <AiOutlineTeam />
-          </i>{" "}
-          Our Team
-        </Link>
-        <Link to="/">
-          <i className="bi bi-box-arrow-right me-2">
-            <CiLogout />
-          </i>{" "}
-          Logout
-        </Link>
+        <hr className="fading-line" />
+        <ul className="root-list">
+          <Link
+            className={`nav-btn ${active === "dashboard" ? "active" : ""}`}
+            onClick={() => setActive("dashboard")}
+          >
+            <LuLayoutDashboard className="icon" />
+            Dashboard
+          </Link>
+          <Link
+            className={`nav-btn ${active === "profile" ? "active" : ""} `}
+            onClick={() => setActive("profile")}
+          >
+            <CgProfile className="icon" />
+            Profile
+          </Link>
+          <Link
+            className={`nav-btn ${active === "manage-users" ? "active" : ""}`}
+            onClick={() => setActive("manage-users")}
+          >
+            <MdContentPaste className="icon" />
+            Manage Users
+          </Link>
+          <Link
+            className={`nav-btn ${active === "manage-content" ? "active" : ""}`}
+            onClick={() => setActive("manange-content")}
+          >
+            <LuTableOfContents className="icon" />
+            Manage Content
+          </Link>
+          <Link
+            className={`nav-btn ${active === "reports" ? "active" : ""} `}
+            onClick={() => setActive("reports")}
+          >
+            <TbReportSearch className="icon" />
+            Reports
+          </Link>
+          <Link className="nav-btn logout-btn">
+            <RiLogoutCircleLine className="icon" />
+            Logout
+          </Link>
+        </ul>
       </div>
-      <div className="main-content">
+      <div className="main-container-2">
         <Outlet />
       </div>
     </div>
