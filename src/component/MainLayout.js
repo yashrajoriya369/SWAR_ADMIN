@@ -45,7 +45,7 @@ const MainLayout = () => {
           </Link>
           <Link
             className={`nav-btn ${active === "manage-content" ? "active" : ""}`}
-            onClick={() => setActive("manange-content")}
+            onClick={() => setActive("manage-content")}
           >
             <LuTableOfContents className="icon" />
             Manage Content
