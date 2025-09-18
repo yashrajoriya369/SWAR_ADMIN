@@ -22,35 +22,35 @@ const MainLayout = () => {
         </div>
         <hr className="fading-line" />
         <ul className="root-list">
-          <Link
+          <Link to="/admin"
             className={`nav-btn ${active === "dashboard" ? "active" : ""}`}
             onClick={() => setActive("dashboard")}
           >
             <LuLayoutDashboard className="icon" />
             Dashboard
           </Link>
-          <Link
+          <Link to="profile"
             className={`nav-btn ${active === "profile" ? "active" : ""} `}
             onClick={() => setActive("profile")}
           >
             <CgProfile className="icon" />
             Profile
           </Link>
-          <Link
+          <Link to="manage-users"
             className={`nav-btn ${active === "manage-users" ? "active" : ""}`}
             onClick={() => setActive("manage-users")}
           >
             <MdContentPaste className="icon" />
             Manage Users
           </Link>
-          <Link
+          <Link to="manage-content"
             className={`nav-btn ${active === "manage-content" ? "active" : ""}`}
             onClick={() => setActive("manage-content")}
           >
             <LuTableOfContents className="icon" />
             Manage Content
           </Link>
-          <Link
+          <Link to="report"
             className={`nav-btn ${active === "reports" ? "active" : ""} `}
             onClick={() => setActive("reports")}
           >

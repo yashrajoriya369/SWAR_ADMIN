@@ -3,6 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./component/MainLayout";
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/login";
+import Profile from "./pages/profile";
+import User from "./pages/users";
+import Content from "./pages/content";
+import Report from "./pages/report"
 
 const App = () => {
   return (
@@ -16,11 +20,10 @@ const App = () => {
         <Route path="create-account" element={<SignUp />} /> */}
         <Route path="admin" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
-          {/* <Route path="profile" element={<Profile />} />
-          <Route path="interviews" element={<Interviews />} />
-          <Route path="history" element={<History />} />
-          <Route path="team" element={<Team />} />
-          <Route path="login" element={<Login />} /> */}
+          <Route path="profile" element={<Profile />} />
+          <Route path="manage-users" element={<User />} />
+          <Route path="manage-content" element={<Content />} />
+          <Route path="report" element={<Report />} />
         </Route>
       </Routes>
     </BrowserRouter>
