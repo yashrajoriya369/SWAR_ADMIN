@@ -181,8 +181,8 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
 }
-.card-div-icon .card-icon{
-  color: #FFFFFF;
+.card-div-icon .card-icon {
+  color: #ffffff;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -216,3 +216,186 @@ body {
   width: 85vw;
   height: 100vh;
 }
+
+/* Quiz Page CSS Starts Here */
+
+.quiz-container {
+  width: 90%;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 8px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+.quiz-container .quiz-title {
+  background: linear-gradient(180deg, #3d3d3d 0%, #1a1a1a 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  color: #fff;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 22px;
+  position: absolute;
+  top: -18px;
+  width: 97.5%;
+}
+
+.quiz-data-container {
+  margin-top: 20px;
+}
+.quiz-data {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: static;
+  max-width: 240px;
+}
+
+.quiz-data label {
+  font-size: 0.9rem;
+  color: #818cf8;
+  font-weight: 700;
+  position: relative;
+  top: 0.75rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background: #fff;
+  width: fit-content;
+}
+
+.quiz-data input {
+  padding: 11px 10px;
+  font-size: 0.85rem;
+  border: 2px #818cf8 solid;
+  border-radius: 5px;
+  background: transparent;
+  width: 1400px;
+}
+.quiz-data input::placeholder {
+  color: #000;
+}
+
+.quiz-data select {
+  padding: 11px 10px;
+  font-size: 0.85rem;
+  border: 2px #818cf8 solid;
+  border-radius: 5px;
+  background: transparent;
+  width: 400px;
+}
+
+.quiz-data select:focus {
+  outline: #818cf8;
+}
+.quiz-data input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.question-data {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: static;
+  max-width: 240px;
+}
+
+.question-data label {
+  font-size: 0.9rem;
+  color: #818cf8;
+  font-weight: 700;
+  position: relative;
+  top: 0.75rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background: #fff;
+  width: fit-content;
+}
+
+.question-data input {
+  padding: 11px 10px;
+  font-size: 0.85rem;
+  border: 2px #818cf8 solid;
+  border-radius: 5px;
+  background: transparent;
+  width: 1350px;
+}
+.questoin-data input::placeholder {
+  color: #000;
+}
+
+.question-data select {
+  padding: 11px 10px;
+  font-size: 0.85rem;
+  border: 2px #818cf8 solid;
+  border-radius: 5px;
+  background: transparent;
+  width: 400px;
+}
+
+.question-data select:focus {
+  outline: #818cf8;
+}
+.question-data input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.quiz-add-questions-btn {
+  text-align: end;
+  margin: 20px 15px 0px 0px;
+  margin-bottom: 50px;
+}
+.quiz-add-questions-btn .add-question-btn {
+  border-radius: 8px;
+  padding: 8px 25px;
+  background-color: #818cf8;
+  border: none;
+  color: #fff;
+}
+.quiz-add-questions-btn .add-question-btn:hover {
+  background-color: #fff;
+  border: 1px solid #818cf8;
+  color: #000;
+  transition: 0.5s ease-in;
+}
+.add-questions-page-btn {
+  text-align: center;
+  margin-top: 50px;
+}
+.add-questions-page-btn .add-questions-btn {
+  padding: 5px 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 2px solid #818cf8;
+  font-weight: 300;
+}
+
+.add-questions-page-btn .add-questions-btn:hover {
+  background-color: #818cf8;
+  color: #fff;
+}
+.add-questions-page-submit-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.add-questions-page-submit-btn > :nth-child(1),
+.add-questions-page-submit-btn > :nth-child(2) {
+  margin-right: 50px;
+  border-radius: 8px;
+  padding: 8px 25px;
+  background-color: #818cf8;
+  border: none;
+  color: #fff;
+}
+.add-questions-page-submit-btn > :nth-child(1):hover,
+.add-questions-page-submit-btn > :nth-child(2):hover {
+  background-color: #fff;
+  border: 1px solid #818cf8;
+  color: #000;
+  transition: 0.5s ease;
+}
+
+/* Quiz Page CSS Ends Here */

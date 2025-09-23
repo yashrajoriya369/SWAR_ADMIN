@@ -168,40 +168,10 @@
 
 
 
-
-
-
-  // Delete a question
-  const deleteQuestion = (index) => {
-    const newQuestions = questions.filter((_, i) => i !== index);
-    setQuestions(newQuestions);
-  };
-
-  // Handle question text change
-  const handleQuestionChange = (index, value) => {
-    const newQuestions = [...questions];
-    newQuestions[index].questions = value;
-    setQuestions(newQuestions);
-  };
-
-  // Handle option change
-  const handleOptionChange = (qIndex, oIndex, value) => {
-    const newQuestions = [...questions];
-    newQuestions[qIndex].options[oIndex] = value;
-
-    // Reset correctAnswer if it no longer exists in options
-    if (
-      !newQuestions[qIndex].options.includes(newQuestions[qIndex].correctAnswer)
-    ) {
-      newQuestions[qIndex].correctAnswer = "";
-    }
-
-    setQuestions(newQuestions);
-  };
-
-  // Handle correct answer change
-  const handleCorrectAnswerChange = (qIndex, value) => {
-    const newQuestions = [...questions];
-    newQuestions[qIndex].correctAnswer = value;
-    setQuestions(newQuestions);
-  };
+  {/* <button
+                    type="button"
+                    onClick={() => arrayHelpers.remove(index)}
+                    style={{ color: "red" }}
+                  >
+                    Delete Question
+                  </button> */}
