@@ -1,7 +1,6 @@
 import React from "react";
 import { FieldArray } from "formik";
 import { RxCross1 } from "react-icons/rx";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 const QuizQuestions = ({ values, handleChange, goBack }) => {
   return (

@@ -211,6 +211,86 @@ body {
 }
 /* Card CSS Ends Here */
 
+/* Quiz Card CSS Starts Here */
+
+.quiz-card {
+  margin-top: 40px;
+  background-color: #fff;
+  position: relative;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.quiz-card-div-icon .quiz-icon {
+  position: absolute;
+  top: -10%;
+  font-size: 5rem;
+}
+.quiz-card .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-right: 20px;
+}
+
+.quiz-card .card-title {
+  font-size: 16px;
+  font-weight: 300;
+}
+.quiz-card .value {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.quiz-card .growth {
+  color: green;
+  font-size: 14px;
+}
+/* Quiz Card CSS Ends Here */
+
+/* Content CSS Starts Here */
+.card-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.action-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: #6366f1;
+}
+
+.action-card .icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: #6366f1;
+}
+
+.action-card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #222;
+}
+
+.action-card p {
+  color: #555;
+  font-size: 14px;
+}
+
+/* Content CSS Ends Here */
+
 .main-container-2 {
   margin: 0px 30px 0px 0px;
   width: 85vw;
@@ -397,5 +477,158 @@ body {
   color: #000;
   transition: 0.5s ease;
 }
+
+/* Table Quiz CSS Starts Here */
+
+.main-table-container {
+  background: #f5f7fa;
+  margin: 0;
+  padding: 20px;
+  padding-top: 70px;
+}
+
+.table-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 99%;
+  margin: auto;
+  position: relative; /* Changed to relative */
+}
+
+.table-header {
+  position: absolute;
+  top: -30px; /* Adjusted position */
+  left: 20px;
+  width: calc(100% - 40px); /* Adjusted width */
+  background: linear-gradient(180deg, #4caf50 0%, #2e7d32 100%);
+  color: white;
+  padding: 20px 25px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  z-index: 10; /* Ensure header stays on top */
+}
+
+.table-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.quiz-table {
+  width: 100%;
+  margin-top: 25px;
+  border-collapse: collapse;
+}
+
+.quiz-table th, .quiz-table td {
+  padding: 12px 15px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.quiz-table th {
+  background: #f0f0f0;
+  font-weight: 500;
+  color: #555;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.quiz-table tbody tr {
+  border-bottom: 1px solid #eee;
+}
+.quiz-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 12px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status.online {
+  background: #28a745;
+}
+
+.status.offline {
+  background: #6c757d;
+}
+
+.action-btn {
+  background: linear-gradient(180deg, #3d3d3d 0%, #1a1a1a 100%);
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.action-btn:hover {
+  background: #2980b9;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.pagination-btn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: linear-gradient(180deg, #3d3d3d 0%, #1a1a1a 100%);
+  color: #FFF;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #f0f0f0;
+}
+
+.pagination-btn.active {
+  background: #FFF;
+  color: #000;
+}
+
+.pagination-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.final-create-quiz-btn{
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 8px 25px;
+  border-radius: 7px;
+  color: #FFF;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(180deg, #3d3d3d 0%, #1a1a1a 100%);
+  font-weight: 300;
+}
+.final-create-quiz-btn:hover{
+  color: #FFF;
+  /* font-weight: 100; */
+  font-size: 19px;
+  transition: 0.1s ease-out;
+}
+
 
 /* Quiz Page CSS Ends Here */

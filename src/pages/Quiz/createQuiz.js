@@ -4,12 +4,11 @@ import * as Yup from "yup";
 import QuizDetails from "./quizDetails";
 import QuizQuestions from "./quizQuestions";
 import { useDispatch } from "react-redux";
-import { registerQuiz } from "../feature/Quiz/quizSlice"; // adjust path
+import { registerQuiz } from "../../feature/Quiz/quizSlice";
 
 const quizSchema = Yup.object().shape({
   quizName: Yup.string().required("Quiz name is required"),
   subjectId: Yup.string().required("Subject ID is required"),
-  // Add more validation as needed
 });
 
 const CreateQuiz = () => {
@@ -41,8 +40,6 @@ const CreateQuiz = () => {
 
   return (
     <div className="quiz-container">
-      
-
       <Formik
         initialValues={initialValues}
         validationSchema={quizSchema}

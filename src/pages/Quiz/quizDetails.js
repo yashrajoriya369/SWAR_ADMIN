@@ -4,7 +4,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
   return (
     <>
-      <h2 className="quiz-title">Create a Quiz</h2>
+      <h2 className="quiz-title" style={{padding: "15px"}}>Create a Quiz</h2>
       <div className="quiz-data-container quiz-data">
         <label>Quiz Name:</label>
         <input
