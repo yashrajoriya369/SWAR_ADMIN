@@ -481,78 +481,77 @@ body {
 /* Table Quiz CSS Starts Here */
 
 .main-table-container {
-  background: #f5f7fa;
-  margin: 0;
-  padding: 20px;
-  padding-top: 70px;
+  background: #f0f2f5;
+  padding-top: 100px;
 }
 
 .table-container {
   background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  width: 99%;
-  margin: auto;
-  position: relative; /* Changed to relative */
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  max-width: 1600px;
+  position: relative;
 }
 
 .table-header {
   position: absolute;
-  top: -30px; /* Adjusted position */
-  left: 20px;
-  width: calc(100% - 40px); /* Adjusted width */
-  background: linear-gradient(180deg, #4caf50 0%, #2e7d32 100%);
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, #3b3b3b, #121212);
   color: white;
-  padding: 20px 25px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  z-index: 10; /* Ensure header stays on top */
+  padding: 12px 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 97%;
 }
-
 .table-header h2 {
-  margin: 0;
-  font-size: 16px;
+  font-size: 1.5rem;
+  padding-top: 5px;
   font-weight: 400;
 }
 
 .quiz-table {
   width: 100%;
-  margin-top: 25px;
+  margin-top: 8px;
   border-collapse: collapse;
 }
 
-.quiz-table th, .quiz-table td {
-  padding: 12px 15px;
+.quiz-table th,
+.quiz-table td {
+  padding: 14px 18px;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .quiz-table th {
-  background: #f0f0f0;
-  font-weight: 500;
-  color: #555;
-  border-radius: 10px;
-  text-align: center;
+  background: #f7f7f7;
+  color: #333;
+  font-weight: 700;
 }
 
 .quiz-table tbody tr {
   border-bottom: 1px solid #eee;
+  transition: background 0.3s;
 }
-.quiz-table tbody tr:nth-child(even) {
-  background: #fafafa;
+
+.quiz-table tbody tr:hover {
+  background-color: #f0f8ff;
 }
 
 .status {
-  padding: 5px 10px;
-  border-radius: 12px;
+  padding: 6px 12px;
+  border-radius: 7px;
   color: white;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
 }
 
 .status.online {
   background: #28a745;
+  font-weight: bold;
 }
 
 .status.offline {
@@ -562,52 +561,63 @@ body {
 .action-btn {
   background: linear-gradient(180deg, #3d3d3d 0%, #1a1a1a 100%);
   color: white;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  transition: 0.2s;
+  transition: all 0.3s ease;
+  margin-right: 5px;
 }
 
 .action-btn:hover {
   background: #2980b9;
+  transform: scale(1.05);
 }
 
-/* Pagination Styles */
+/* Pagination CSS Starts Here */
+
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  gap: 5px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .pagination-btn {
-  padding: 8px 12px;
+  padding: 10px 16px;
   border: 1px solid #ddd;
   background: linear-gradient(180deg, #3d3d3d 0%, #1a1a1a 100%);
-  color: #FFF;
+  color: #fff;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 14px;
   transition: all 0.3s;
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background-color: #f0f0f0;
+  background: #4caf50;
 }
 
 .pagination-btn.active {
-  background: #FFF;
+  background: #fff;
   color: #000;
+  font-weight: bold;
+  border: 1px solid #4caf50;
 }
 
 .pagination-btn:disabled {
   color: #ccc;
+  background: #333;
   cursor: not-allowed;
 }
 
-.final-create-quiz-btn{
+/* Pagination CSS Ends Here */
+
+
+.final-create-quiz-btn {
   display: flex;
   align-items: center;
   gap: 17px;
@@ -618,17 +628,16 @@ body {
   text-decoration: none;
   padding: 8px 25px;
   border-radius: 7px;
-  color: #FFF;
+  color: #fff;
   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
   background: linear-gradient(180deg, #3d3d3d 0%, #1a1a1a 100%);
   font-weight: 300;
 }
-.final-create-quiz-btn:hover{
-  color: #FFF;
+.final-create-quiz-btn:hover {
+  color: #fff;
   /* font-weight: 100; */
   font-size: 19px;
   transition: 0.1s ease-out;
 }
-
 
 /* Quiz Page CSS Ends Here */

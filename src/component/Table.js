@@ -28,10 +28,11 @@ const Table = () => {
       time: "00:00",
       marks: "0"
     },
+
   ]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(7);
+  const [itemsPerPage] = useState(6);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -82,7 +83,7 @@ const Table = () => {
                   <td>{quiz.date}</td>
                   <td>{quiz.time}</td>
                   <td>{quiz.marks}</td>
-                  <td style={{display: "flex", gap: "8px"}}>
+                  <td>
                     <button className="action-btn">Update</button>
                     <button className="action-btn">Delete</button>
                   </td>
