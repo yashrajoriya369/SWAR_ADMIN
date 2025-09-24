@@ -15,19 +15,16 @@ export const registerQuiz = createAsyncThunk(
 );
 
 export const getAllQuizzes = createAsyncThunk(
-  "quizzes/get-quizzes",
-  async (thunkAPI) => {
+  "quiz/getAll",
+  async (_, thunkAPI) => {
     try {
       return await quizService.getAllQuiz();
     } catch (error) {
-      const message =
-        error.response?.data?.error ||
-        error.message ||
-        "Failed to fetch quizzes";
-      return thunkAPI.rejectWithValue(message);
+      return thunkAPI.rejectWithValue(error.message || "Fetch Failed");
     }
   }
 );
+
 const initialState = {
   quizzes: [],
   isLoading: false,
@@ -56,16 +53,12 @@ export const quizSlice = createSlice({
       .addCase(registerQuiz.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.isError = false;
         state.createdQuiz = action.payload;
-        state.message = "Quiz Created";
       })
       .addCase(registerQuiz.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.isSuccess = false;
-        state.message = action.payload || "Creation Failed";
-        state.createdQuiz = null;
+        state.message = action.payload;
       })
       .addCase(getAllQuizzes.pending, (state) => {
         state.isLoading = true;
@@ -74,14 +67,12 @@ export const quizSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.quizzes = action.payload;
+        state.quizzes = action.payload; // ✅ Save fetched quizzes
       })
       .addCase(getAllQuizzes.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.isSuccess = false;
-        state.message = action.payload || "Failed to fetch quizzes";
-        state.quizzes = [];
+        state.message = action.payload;
       });
   },
 });

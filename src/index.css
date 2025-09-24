@@ -543,19 +543,23 @@ body {
 
 .status {
   padding: 6px 12px;
-  border-radius: 7px;
+  border-radius: 5px;
   color: white;
   font-size: 13px;
   text-transform: uppercase;
 }
 
-.status.online {
+.status.active {
   background: #28a745;
-  font-weight: bold;
+  font-weight: 300;
 }
 
-.status.offline {
+.status.inactive {
   background: #6c757d;
+}
+
+.status.completed {
+  background: #007bff;
 }
 
 .action-btn {

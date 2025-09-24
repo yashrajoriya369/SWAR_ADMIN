@@ -1,40 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import QuizCard from "../component/QuizCard";
 import { Link } from "react-router-dom";
 import { IoAddCircleOutline } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllQuizzes } from "../feature/Quiz/quizSlice";
 
 const Quiz = () => {
-  const quizState = useSelector((state) => state.quiz.quizzes)
-  // console.log(quizState)
+  const dispatch = useDispatch();
+  const { quizzes, isLoading } = useSelector((state) => state.quiz);
 
-  const [quizzes] = useState([
-    {
-      name: "React Basics",
-      category: "React",
-      difficulty: "Easy",
-      status: "online",
-      date: "01/09/2025",
-      time: "00:00",
-    },
-    {
-      name: "JavaScript Fundamentals",
-      category: "JavaScript",
-      difficulty: "Medium",
-      status: "offline",
-      date: "10/09/2025",
-      time: "00:00",
-    },
-    {
-      name: "DSA Practice",
-      category: "DSA",
-      difficulty: "Hard",
-      status: "online",
-      date: "15/09/2025",
-      time: "00:00",
-      marks: "0",
-    },
-  ]);
+  useEffect(() => {
+    dispatch(getAllQuizzes());
+  }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
@@ -68,41 +45,46 @@ const Quiz = () => {
             <h2>All Quizzes</h2>
           </div>
 
-          <table className="quiz-table">
-            <thead>
-              <tr>
-                <th>SubjectId</th>
-                <th>Subject Name</th>
-                <th>Attempt Type</th>
-                <th>Status</th>
-                <th>Available From</th>
-                <th>Available To</th>
-                <th>Marks</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentItems.map((quiz, index) => (
-                <tr key={index}>
-                  <td>{quiz.name}</td>
-                  <td>{quiz.category}</td>
-                  <td>{quiz.difficulty}</td>
-                  <td>
-                    <span className={`status ${quiz.status}`}>
-                      {quiz.status.toUpperCase()}
-                    </span>
-                  </td>
-                  <td>{quiz.date}</td>
-                  <td>{quiz.time}</td>
-                  <td>{quiz.marks}</td>
-                  <td>
-                    <button className="action-btn">Update</button>
-                    <button className="action-btn">Delete</button>
-                  </td>
+          {isLoading ? (
+            <p>Loading quizzes...</p>
+          ) : (
+            <table className="quiz-table">
+              <thead>
+                <tr>
+                  <th>SubjectId</th>
+                  <th>Subject Name</th>
+                  <th>Attempt Type</th>
+                  <th>Status</th>
+                  <th>Available From</th>
+                  <th>Available To</th>
+                  <th>Time Left</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentItems.map((quiz, index) => (
+                  <tr key={quiz._id || index}>
+                    <td>{quiz.subjectId}</td>
+                    <td>{quiz.quizName}</td>
+                    <td>{quiz.attemptType}</td>
+                    <td>
+                      <span className={`status ${quiz.status.toLowerCase()}`}>
+                        {quiz.status}
+                      </span>
+                    </td>
+                    <td>{new Date(quiz.startTime).toLocaleString()}</td>
+                    <td>{new Date(quiz.endTime).toLocaleString()}</td>
+                    {/* <td>{quiz.marks}</td> */}
+                    <td>00:00</td>
+                    <td>
+                      <button className="action-btn">Update</button>
+                      <button className="action-btn">Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
           <div className="pagination">
             <button
               className="pagination-btn"
