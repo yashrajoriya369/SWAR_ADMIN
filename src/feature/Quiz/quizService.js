@@ -8,6 +8,13 @@ const create = async (quizData) => {
   }
 };
 
+const getAllQuiz = async () => {
+  const response = await axios.get(`${base_url}quizzes/`);
+  console.log(response)
+  // return response.data;
+};
+
 export const quizService = {
   create,
+  getAllQuiz,
 };

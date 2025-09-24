@@ -14,6 +14,20 @@ export const registerQuiz = createAsyncThunk(
   }
 );
 
+export const getAllQuizzes = createAsyncThunk(
+  "quizzes/get-quizzes",
+  async (thunkAPI) => {
+    try {
+      return await quizService.getAllQuiz();
+    } catch (error) {
+      const message =
+        error.response?.data?.error ||
+        error.message ||
+        "Failed to fetch quizzes";
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 const initialState = {
   quizzes: [],
   isLoading: false,
@@ -52,6 +66,22 @@ export const quizSlice = createSlice({
         state.isSuccess = false;
         state.message = action.payload || "Creation Failed";
         state.createdQuiz = null;
+      })
+      .addCase(getAllQuizzes.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllQuizzes.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.quizzes = action.payload;
+      })
+      .addCase(getAllQuizzes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload || "Failed to fetch quizzes";
+        state.quizzes = [];
       });
   },
 });
