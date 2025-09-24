@@ -1,5 +1,4 @@
 import React from "react";
-import { MdOutlineStackedLineChart } from "react-icons/md";
 
 const QuizCard = (props) => {
   return (
