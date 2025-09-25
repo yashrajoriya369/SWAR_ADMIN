@@ -23,9 +23,21 @@ const deleteQuiz = async (id) => {
   return response.data;
 };
 
+const updateQuiz = async (quizId, quizData) => {
+  try {
+    const response = await axios.put(`${base_url}quizzes/${quizId}`, quizData);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || error.message || "Failed to update quiz"
+    );
+  }
+};
+
 export const quizService = {
   create,
   getAllQuiz,
   getAQuiz,
   deleteQuiz,
+  updateQuiz,
 };

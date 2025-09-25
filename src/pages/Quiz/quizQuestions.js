@@ -1,8 +1,12 @@
 import React from "react";
 import { FieldArray } from "formik";
 import { RxCross1 } from "react-icons/rx";
+import { useLocation } from "react-router-dom";
 
 const QuizQuestions = ({ values, handleChange, goBack }) => {
+  const location = useLocation();
+  const getQuizId = location.pathname.split("/")[5];
+
   return (
     <>
       <h2
@@ -15,7 +19,7 @@ const QuizQuestions = ({ values, handleChange, goBack }) => {
           zIndex: "1",
         }}
       >
-        Create a Questions
+        {getQuizId ? "Update Questions" : "Create a Questions"}
       </h2>
       <FieldArray name="questions">
         {(arrayHelpers) => (
@@ -62,7 +66,7 @@ const QuizQuestions = ({ values, handleChange, goBack }) => {
                   <input
                     type="text"
                     name={`questions[${index}].questionText`}
-                    value={q.questionText}
+                    value={q.questionText || ""}
                     onChange={handleChange}
                   />
                 </div>
@@ -71,7 +75,7 @@ const QuizQuestions = ({ values, handleChange, goBack }) => {
                   <label>Question Type:</label>
                   <select
                     name={`questions[${index}].questionType`}
-                    value={q.questionType}
+                    value={q.questionType || "Multiple Choice"}
                     onChange={handleChange}
                   >
                     <option value="Multiple Choice">Multiple Choice</option>
@@ -84,8 +88,9 @@ const QuizQuestions = ({ values, handleChange, goBack }) => {
                   <input
                     type="number"
                     name={`questions[${index}].marks`}
-                    value={q.marks}
+                    value={q.marks || 1}
                     onChange={handleChange}
+                    min={1}
                   />
                 </div>
 
@@ -97,7 +102,7 @@ const QuizQuestions = ({ values, handleChange, goBack }) => {
                       <input
                         type="text"
                         name={`questions[${index}].options[${oIndex}]`}
-                        value={opt}
+                        value={opt || ""}
                         onChange={handleChange}
                       />
                     </div>
@@ -105,10 +110,13 @@ const QuizQuestions = ({ values, handleChange, goBack }) => {
                 </div>
 
                 <div className="question-data">
-                  <label>Correct Answer:</label>
+                  <label htmlFor={`questions[${index}].correctAnswer`}>
+                    Correct Answer:
+                  </label>
                   <select
+                    id={`questions[${index}].correctAnswer`}
                     name={`questions[${index}].correctAnswer`}
-                    value={q.correctAnswer}
+                    value={q.correctAnswer || ""}
                     onChange={handleChange}
                   >
                     <option value="">-- Select --</option>
@@ -148,7 +156,7 @@ const QuizQuestions = ({ values, handleChange, goBack }) => {
           ← Back
         </button>
         <button type="submit" style={{ marginLeft: "20px" }}>
-          Submit Quiz
+          {getQuizId ? "Update Quiz" : "Create Quiz"}
         </button>
       </div>
     </>

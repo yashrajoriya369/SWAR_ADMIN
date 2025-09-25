@@ -42,6 +42,17 @@ export const deleteQuizzes = createAsyncThunk(
     try {
       return await quizService.deleteQuiz(id);
     } catch (error) {
+      return thunkAPI.rejectWithValue(error.message || "Failed to update quiz");
+    }
+  }
+);
+
+export const updateQuizzes = createAsyncThunk(
+  "quiz/update-quiz",
+  async ({ quizId, quizData }, thunkAPI) => {
+    try {
+      return await quizService.updateQuiz(quizId, quizData);
+    } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -54,6 +65,9 @@ const initialState = {
   isError: false,
   message: "",
   createdQuiz: null,
+  selectedQuiz: null,
+  deletedQuizz: null,
+  updatedQuiz: null,
 };
 
 export const quizSlice = createSlice({
@@ -126,6 +140,20 @@ export const quizSlice = createSlice({
         state.isSuccess = false;
         state.message = action.error;
       })
+      .addCase(updateQuizzes.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateQuizzes.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.updatedQuiz = action.payload;
+      })
+      .addCase(updateQuizzes.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload || "Failed to update quiz";
+      });
   },
 });
 

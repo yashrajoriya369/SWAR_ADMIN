@@ -1,19 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import QuizDetails from "./quizDetails";
 import QuizQuestions from "./quizQuestions";
-import { useDispatch } from "react-redux";
-import { registerQuiz } from "../../feature/Quiz/quizSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerQuiz,
+  getAQuizzes,
+  updateQuizzes,
+} from "../../feature/Quiz/quizSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const quizSchema = Yup.object().shape({
   quizName: Yup.string().required("Quiz name is required"),
   subjectId: Yup.string().required("Subject ID is required"),
+  attemptType: Yup.string().oneOf(["Single", "Multiple"]),
+  startTime: Yup.string().required("Start time is required"),
+  endTime: Yup.string()
+    .required("End time is required")
+    .test(
+      "is-after-start",
+      "End time must be after start time",
+      function (value) {
+        const { startTime } = this.parent;
+        return new Date(value) > new Date(startTime);
+      }
+    ),
+  durationMinutes: Yup.number()
+    .required("Duration is required")
+    .min(1, "Duration must be at least 1 minute"),
+  status: Yup.string().oneOf(["Active", "Inactive", "Completed"]),
+  questions: Yup.array()
+    .of(
+      Yup.object().shape({
+        questionText: Yup.string().required("Question text is required"),
+        questionType: Yup.string().oneOf(["Multiple Choice", "True/False"]),
+        marks: Yup.number().min(1).required("Marks are required"),
+        options: Yup.array().when("questionType", ([type], schema) => {
+          type === "Multiple Choice" ? schema.min(2) : schema.length(2);
+        }),
+
+        correctAnswer: Yup.string().required("Correct answer is required"),
+      })
+    )
+    .min(1, "At least one question is required"),
 });
 
 const CreateQuiz = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
+
+  const getQuizId = location.pathname.split("/")[5];
+  const { selectedQuiz, isLoading } = useSelector((state) => state.quiz);
+
+  useEffect(() => {
+    if (getQuizId) {
+      dispatch(getAQuizzes(getQuizId));
+    }
+  }, [dispatch, getQuizId]);
 
   const initialValues = {
     quizName: "",
@@ -21,7 +67,7 @@ const CreateQuiz = () => {
     attemptType: "Single",
     startTime: "",
     endTime: "",
-    durationMintutes: 30,
+    durationMinutes: 1,
     status: "Inactive",
     questions: [
       {
@@ -34,14 +80,42 @@ const CreateQuiz = () => {
     ],
   };
 
+  function formatDateTimeLocal(dateString) {
+    const date = new Date(dateString);
+    const offset = date.getTimezoneOffset() * 60000;
+    const localDate = new Date(date.getTime() - offset);
+    return localDate.toISOString().slice(0, 16);
+  }
+  const fromInitialValues =
+    selectedQuiz && getQuizId
+      ? {
+          ...selectedQuiz,
+          startTime: formatDateTimeLocal(selectedQuiz.startTime),
+          endTime: formatDateTimeLocal(selectedQuiz.endTime),
+        }
+      : initialValues;
+
   const handleSubmit = (values) => {
-    dispatch(registerQuiz(values));
+    const formatedValues = {
+      ...values,
+      startTime: new Date(values.startTime).toISOString(),
+      endTime: new Date(values.endTime).toISOString(),
+    };
+    if (getQuizId) {
+      dispatch(updateQuizzes({ quizId: getQuizId, quizData: formatedValues }));
+      setTimeout(() => {
+        navigate("/admin/manage-content/manage-quizzes/");
+      }, 100);
+    } else {
+      dispatch(registerQuiz(values));
+    }
   };
 
   return (
     <div className="quiz-container">
       <Formik
-        initialValues={initialValues}
+        initialValues={fromInitialValues}
+        enableReinitialize
         validationSchema={quizSchema}
         onSubmit={handleSubmit}
       >

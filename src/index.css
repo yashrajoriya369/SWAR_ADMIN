@@ -646,6 +646,7 @@ body {
 /* Modal container */
 .modal-box {
   width: 380px;
+  height: 45vh;
   display: flex;
   flex-direction: column;
   padding: 1rem; /* 16px */

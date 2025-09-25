@@ -81,7 +81,7 @@ const Quiz = () => {
                     <th>Status</th>
                     <th>Available From</th>
                     <th>Available To</th>
-                    <th>Time Left</th>
+                    <th>Duration</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -98,9 +98,9 @@ const Quiz = () => {
                       </td>
                       <td>{new Date(quiz.startTime).toLocaleString()}</td>
                       <td>{new Date(quiz.endTime).toLocaleString()}</td>
-                      <td>00:00</td>
+                      <td>{quiz.durationMinutes}</td>
                       <td>
-                        <Link>
+                        <Link to={`create-quizzes/${quiz._id}`}>
                           <CiEdit
                             className="action-btn"
                             style={{

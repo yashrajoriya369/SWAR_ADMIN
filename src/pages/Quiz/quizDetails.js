@@ -1,17 +1,22 @@
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
+  const location = useLocation();
+  const getQuizId = location.pathname.split("/")[5];
   return (
     <>
-      <h2 className="quiz-title" style={{padding: "15px"}}>Create a Quiz</h2>
+      <h2 className="quiz-title" style={{ padding: "15px" }}>
+        {getQuizId ? "Update a Quiz" : "Create a Quiz"}
+      </h2>
       <div className="quiz-data-container quiz-data">
         <label>Quiz Name:</label>
         <input
           type="text"
           name="quizName"
           placeholder="Enter Quiz Name"
-          value={values.quizName}
+          value={values.quizName || ""}
           onChange={handleChange}
         />
         {touched.quizName && errors.quizName && (
@@ -25,7 +30,7 @@ const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
           type="text"
           placeholder="Enter Quiz ID"
           name="subjectId"
-          value={values.subjectId}
+          value={values.subjectId || ""}
           onChange={handleChange}
         />
         {touched.subjectId && errors.subjectId && (
@@ -37,7 +42,7 @@ const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
         <label>Attempt Type:</label>
         <select
           name="attemptType"
-          value={values.attemptType}
+          value={values.attemptType || "Single"}
           onChange={handleChange}
         >
           <option value="Single">Single</option>
@@ -50,7 +55,7 @@ const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
         <input
           type="datetime-local"
           name="startTime"
-          value={values.startTime}
+          value={values.startTime || ""}
           onChange={handleChange}
         />
       </div>
@@ -60,7 +65,7 @@ const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
         <input
           type="datetime-local"
           name="endTime"
-          value={values.endTime}
+          value={values.endTime || ""}
           onChange={handleChange}
         />
       </div>
@@ -69,15 +74,20 @@ const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
         <label>Duration (minutes):</label>
         <input
           type="number"
-          name="durationMintutes"
-          value={values.durationMintutes}
+          name="durationMinutes"
+          value={values.durationMinutes || ""}
           onChange={handleChange}
+          min={1}
         />
       </div>
 
       <div className="quiz-data">
         <label>Status:</label>
-        <select name="status" value={values.status} onChange={handleChange}>
+        <select
+          name="status"
+          value={values.status || "Inactive"}
+          onChange={handleChange}
+        >
           <option value="Inactive">Inactive</option>
           <option value="Active">Active</option>
           <option value="Completed">Completed</option>
