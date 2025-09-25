@@ -53,7 +53,7 @@ const CreateQuiz = () => {
   const [step, setStep] = useState(1);
 
   const getQuizId = location.pathname.split("/")[5];
-  const { selectedQuiz, isLoading } = useSelector((state) => state.quiz);
+  const { selectedQuiz } = useSelector((state) => state.quiz);
 
   useEffect(() => {
     if (getQuizId) {
