@@ -1,19 +1,18 @@
 import React from "react";
-import { MdOutlineStackedLineChart } from "react-icons/md";
 
-const Card = () => {
+const Card = React.memo(({ icon: Icon, title, value, growth }) => {
   return (
     <div className="card">
       <div className="card-div-icon">
-        <MdOutlineStackedLineChart className="card-icon" />
+        {Icon && <Icon className="card-icon" />}
       </div>
       <div className="card-content">
-        <h3 className="card-title">Today User's</h3>
-        <p className="value">0000</p>
+        <h3 className="card-title">{title}</h3>
+        <p className="value">{value}</p>
       </div>
-      <span className="growth">+55% than last week</span>
+      {growth && <span className="growth">{growth}</span>}
     </div>
   );
-};
+});
 
 export default Card;

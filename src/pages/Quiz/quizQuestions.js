@@ -1,11 +1,10 @@
 import React from "react";
 import { FieldArray } from "formik";
 import { RxCross1 } from "react-icons/rx";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const QuizQuestions = ({ values, handleChange, goBack }) => {
-  const location = useLocation();
-  const getQuizId = location.pathname.split("/")[5];
+  const { getQuizId } = useParams();
 
   return (
     <>

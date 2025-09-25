@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdContentPaste } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
@@ -8,9 +8,35 @@ import { LuTableOfContents } from "react-icons/lu";
 import { TbReportSearch } from "react-icons/tb";
 import { RiLogoutCircleLine } from "react-icons/ri";
 
-const MainLayout = () => {
-  const [active, setActive] = useState("dashboard");
+const menuItems = [
+  {
+    to: "/admin",
+    label: "Dashboard",
+    icon: <LuLayoutDashboard className="icon" />,
+  },
+  {
+    to: "profile",
+    label: "Profile",
+    icon: <CgProfile className="icon" />,
+  },
+  {
+    to: "manage-users",
+    label: "Manage Users",
+    icon: <MdContentPaste className="icon" />,
+  },
+  {
+    to: "manage-content",
+    label: "Manage Content",
+    icon: <LuTableOfContents className="icon" />,
+  },
+  {
+    to: "reports",
+    label: "Reports",
+    icon: <TbReportSearch className="icon" />,
+  },
+];
 
+const MainLayout = () => {
   return (
     <div className="main-container">
       <div className="main-container-1">
@@ -22,45 +48,23 @@ const MainLayout = () => {
         </div>
         <hr className="fading-line" />
         <ul className="root-list">
-          <Link to="/admin"
-            className={`nav-btn ${active === "dashboard" ? "active" : ""}`}
-            onClick={() => setActive("dashboard")}
-          >
-            <LuLayoutDashboard className="icon" />
-            Dashboard
-          </Link>
-          <Link to="profile"
-            className={`nav-btn ${active === "profile" ? "active" : ""} `}
-            onClick={() => setActive("profile")}
-          >
-            <CgProfile className="icon" />
-            Profile
-          </Link>
-          <Link to="manage-users"
-            className={`nav-btn ${active === "manage-users" ? "active" : ""}`}
-            onClick={() => setActive("manage-users")}
-          >
-            <MdContentPaste className="icon" />
-            Manage Users
-          </Link>
-          <Link to="manage-content"
-            className={`nav-btn ${active === "manage-content" ? "active" : ""}`}
-            onClick={() => setActive("manage-content")}
-          >
-            <LuTableOfContents className="icon" />
-            Manage Content
-          </Link>
-          <Link to="report"
-            className={`nav-btn ${active === "reports" ? "active" : ""} `}
-            onClick={() => setActive("reports")}
-          >
-            <TbReportSearch className="icon" />
-            Reports
-          </Link>
-          <Link className="nav-btn logout-btn">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end
+              className={({ isActive }) =>
+                `nav-btn ${isActive ? "active" : ""}`
+              }
+            >
+              {item.icon}
+              {item.label}
+            </NavLink>
+          ))}
+          <button className="nav-btn logout-btn">
             <RiLogoutCircleLine className="icon" />
             Logout
-          </Link>
+          </button>
         </ul>
       </div>
       <div className="main-container-2">

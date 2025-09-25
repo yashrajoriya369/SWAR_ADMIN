@@ -5,11 +5,11 @@ import QuizDetails from "./quizDetails";
 import QuizQuestions from "./quizQuestions";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  registerQuiz,
-  getAQuizzes,
-  updateQuizzes,
+  createQuiz,
+  getQuizById,
+  updateQuiz,
 } from "../../feature/Quiz/quizSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const quizSchema = Yup.object().shape({
   quizName: Yup.string().required("Quiz name is required"),
@@ -48,16 +48,15 @@ const quizSchema = Yup.object().shape({
 
 const CreateQuiz = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
+  const { getQuizId } = useParams();
   const [step, setStep] = useState(1);
 
-  const getQuizId = location.pathname.split("/")[5];
   const { selectedQuiz } = useSelector((state) => state.quiz);
 
   useEffect(() => {
     if (getQuizId) {
-      dispatch(getAQuizzes(getQuizId));
+      dispatch(getQuizById(getQuizId));
     }
   }, [dispatch, getQuizId]);
 
@@ -95,19 +94,25 @@ const CreateQuiz = () => {
         }
       : initialValues;
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const formatedValues = {
       ...values,
       startTime: new Date(values.startTime).toISOString(),
       endTime: new Date(values.endTime).toISOString(),
     };
-    if (getQuizId) {
-      dispatch(updateQuizzes({ quizId: getQuizId, quizData: formatedValues }));
-      setTimeout(() => {
+    try {
+      if (getQuizId) {
+        await dispatch(
+          updateQuiz({ quizId: getQuizId, quizData: formatedValues })
+        ).unwrap();
         navigate("/admin/manage-content/manage-quizzes/");
-      }, 100);
-    } else {
-      dispatch(registerQuiz(values));
+      } else {
+        await dispatch(createQuiz(formatedValues)).unwrap();
+
+        navigate("/admin/manage-content/manage-quizzes/");
+      }
+    } catch (error) {
+      console.error("Failed to save quiz:", error);
     }
   };
 

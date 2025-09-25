@@ -1,10 +1,9 @@
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
-  const location = useLocation();
-  const getQuizId = location.pathname.split("/")[5];
+  const { getQuizId } = useParams();
   return (
     <>
       <h2 className="quiz-title" style={{ padding: "15px" }}>

@@ -15,11 +15,6 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        {/* <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="reset-password" element={<ResetPassword />} />
-        <Route path="terms-and-conditions" element={<Terms />} />
-        <Route path="privacy" element={<Privacy />} />
-        <Route path="create-account" element={<SignUp />} /> */}
         <Route path="admin" element={<MainLayout />}>
           <Route index element={<Dashboard />} />
           <Route path="profile" element={<Profile />} />
@@ -34,11 +29,11 @@ const App = () => {
             element={<Content />}
           />
           <Route
-            path="manage-content/manage-quizzes/create-quizzes/:id"
+            path="manage-content/manage-quizzes/update-quizzes/:getQuizId"
             element={<Content />}
           />
 
-          <Route path="report" element={<Report />} />
+          <Route path="reports" element={<Report />} />
         </Route>
       </Routes>
     </BrowserRouter>

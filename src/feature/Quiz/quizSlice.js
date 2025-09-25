@@ -1,59 +1,68 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { quizService } from "./quizService";
 
-export const registerQuiz = createAsyncThunk(
+// Create Quiz
+export const createQuiz = createAsyncThunk(
   "quiz/create",
   async (quizData, thunkAPI) => {
     try {
       return await quizService.create(quizData);
     } catch (error) {
-      const message =
-        error.response?.data?.error || error.message || "Creation Failed";
-      return thunkAPI.rejectWithValue(message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.error || error.message || "Failed to create quiz"
+      );
     }
   }
 );
 
-export const getAllQuizzes = createAsyncThunk(
-  "quiz/getAll",
+// List All Quizzes
+export const listQuizzes = createAsyncThunk(
+  "quiz/list",
   async (_, thunkAPI) => {
     try {
       return await quizService.getAllQuiz();
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message || "Fetch Failed");
+      return thunkAPI.rejectWithValue(
+        error.response?.data || error.message || "Failed to fetch quizzes"
+      );
     }
   }
 );
 
-export const getAQuizzes = createAsyncThunk(
-  "quiz/getaQuiz",
+// Get Quiz By ID
+export const getQuizById = createAsyncThunk(
+  "quiz/getById",
   async (id, thunkAPI) => {
     try {
       return await quizService.getAQuiz(id);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(
+        error.response?.data || error.message || "Failed to fetch quiz"
+      );
     }
   }
 );
 
-export const deleteQuizzes = createAsyncThunk(
-  "quiz/delete-quiz",
+export const deleteQuiz = createAsyncThunk(
+  "quiz/delete",
   async (id, thunkAPI) => {
     try {
       return await quizService.deleteQuiz(id);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message || "Failed to update quiz");
+      return thunkAPI.rejectWithValue(error.message || "Failed to delete quiz");
     }
   }
 );
 
-export const updateQuizzes = createAsyncThunk(
+export const updateQuiz = createAsyncThunk(
   "quiz/update-quiz",
   async ({ quizId, quizData }, thunkAPI) => {
     try {
       return await quizService.updateQuiz(quizId, quizData);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(
+        error.response?.data || error.message || "Failed to update quiz"
+      );
     }
   }
 );
@@ -66,7 +75,7 @@ const initialState = {
   message: "",
   createdQuiz: null,
   selectedQuiz: null,
-  deletedQuizz: null,
+  deletedQuiz: null,
   updatedQuiz: null,
 };
 
@@ -83,73 +92,78 @@ export const quizSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(registerQuiz.pending, (state) => {
+    // Create
+      .addCase(createQuiz.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(registerQuiz.fulfilled, (state, action) => {
+      .addCase(createQuiz.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.createdQuiz = action.payload;
       })
-      .addCase(registerQuiz.rejected, (state, action) => {
+      .addCase(createQuiz.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(getAllQuizzes.pending, (state) => {
+
+      // List
+      .addCase(listQuizzes.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAllQuizzes.fulfilled, (state, action) => {
+      .addCase(listQuizzes.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         state.quizzes = action.payload;
       })
-      .addCase(getAllQuizzes.rejected, (state, action) => {
+      .addCase(listQuizzes.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(getAQuizzes.pending, (state, action) => {
+
+      // Get By ID
+      .addCase(getQuizById.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getAQuizzes.fulfilled, (state, action) => {
+      .addCase(getQuizById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.selectedQuiz = action.payload;
       })
-      .addCase(getAQuizzes.rejected, (state, action) => {
+      .addCase(getQuizById.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload || "Failed to get quiz";
       })
-      .addCase(deleteQuizzes.pending, (state) => {
+      .addCase(deleteQuiz.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteQuizzes.fulfilled, (state, action) => {
+      .addCase(deleteQuiz.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.deletedQuizz = action.payload;
+        state.deletedQuiz = action.payload;
       })
-      .addCase(deleteQuizzes.rejected, (state, action) => {
+      .addCase(deleteQuiz.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
       })
-      .addCase(updateQuizzes.pending, (state) => {
+      .addCase(updateQuiz.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateQuizzes.fulfilled, (state, action) => {
+      .addCase(updateQuiz.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
         state.updatedQuiz = action.payload;
       })
-      .addCase(updateQuizzes.rejected, (state, action) => {
+      .addCase(updateQuiz.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload || "Failed to update quiz";

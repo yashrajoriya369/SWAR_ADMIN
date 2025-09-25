@@ -22,12 +22,9 @@ const Header = (props) => {
         </div>
         <div className="input-field">
           <input type="text" placeholder="Search here..." id="search-box" />
-          <CgProfile className="header-icon" style={{ cursor: "pointer" }} />
-          <IoSettingsOutline
-            className="header-icon"
-            style={{ cursor: "pointer" }}
-          />
-          <FaRegBell className="header-icon" style={{ cursor: "pointer" }} />
+          <CgProfile className="header-icon" />
+          <IoSettingsOutline className="header-icon" />
+          <FaRegBell className="header-icon" />
         </div>
       </header>
       <hr className="fading-line" />
