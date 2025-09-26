@@ -29,7 +29,7 @@ const quizSchema = Yup.object().shape({
   durationMinutes: Yup.number()
     .required("Duration is required")
     .min(1, "Duration must be at least 1 minute"),
-  status: Yup.string().oneOf(["Active", "Inactive", "Completed"]),
+  status: Yup.string().oneOf(["Active", "Draft", "Archived"]),
   questions: Yup.array()
     .of(
       Yup.object().shape({
@@ -67,7 +67,7 @@ const CreateQuiz = () => {
     startTime: "",
     endTime: "",
     durationMinutes: 1,
-    status: "Inactive",
+    status: "Draft",
     questions: [
       {
         questionText: "",

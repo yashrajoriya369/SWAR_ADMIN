@@ -84,12 +84,12 @@ const QuizDetails = ({ values, handleChange, touched, errors, goToNext }) => {
         <label>Status:</label>
         <select
           name="status"
-          value={values.status || "Inactive"}
+          value={values.status || "Draft"}
           onChange={handleChange}
         >
-          <option value="Inactive">Inactive</option>
           <option value="Active">Active</option>
-          <option value="Completed">Completed</option>
+          <option value="Draft">Draft</option>
+          <option value="Archived">Archived</option>
         </select>
       </div>
       <div className="quiz-add-questions-btn">

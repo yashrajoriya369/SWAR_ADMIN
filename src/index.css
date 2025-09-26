@@ -562,12 +562,12 @@ body {
   font-weight: 300;
 }
 
-.status.inactive {
+.status.draft {
   background: #6c757d;
 }
 
-.status.completed {
-  background: #007bff;
+.status.archived {
+  background: #d84226;
 }
 .quiz-table .action-btn {
   border: none;
