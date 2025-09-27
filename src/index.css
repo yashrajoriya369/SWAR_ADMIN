@@ -14,11 +14,16 @@ body {
 }
 .main-container {
   display: flex;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .main-container-1 {
   width: 15vw;
   height: 100vh;
+  flex-shrink: 1;
+  position: sticky;
+  top: 0;
 }
 
 .logo-icon {
@@ -258,10 +263,10 @@ body {
 
 /* Content CSS Starts Here */
 .card-grid {
-  margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
+  padding: 0px 15px;
 }
 .action-card {
   background: #fff;
@@ -303,6 +308,8 @@ body {
   margin: 0px 30px 0px 0px;
   width: 85vw;
   height: 100vh;
+  flex-direction: 1;
+  overflow-y: auto;
 }
 
 /* Quiz Page CSS Starts Here */
@@ -557,28 +564,35 @@ body {
   text-transform: uppercase;
 }
 
-.status.active {
-  background: #28a745;
+.status.upcoming {
+  background: #007bff;
   font-weight: 300;
 }
 
-.status.draft {
-  background: #6c757d;
+.status.running {
+  background: #28a745;
 }
 
-.status.archived {
+.status.ended {
   background: #d84226;
 }
 .quiz-table .action-btn {
   border: none;
-  font-size: 1.5rem;
   background: none;
 }
-.quiz-table .action-btn:nth-child(1) {
-  margin-left: 8px;
+.quiz-table .show-icon {
+  color: green;
+  font-size: 1.3rem;
+  cursor: pointer;
 }
-.quiz-table .action-btn:nth-child(2) {
+.quiz-table .edit-icon {
+  color: blue;
+  font-size: 1.5rem;
+  margin: 0px 15px 0px 15px;
+}
+.quiz-table .delete-btn {
   color: red;
+  font-size: 1.5rem;
 }
 
 /* Pagination CSS Starts Here */
@@ -625,18 +639,21 @@ body {
 .final-create-quiz-btn {
   display: flex;
   align-items: center;
-  gap: 17px;
-  position: absolute;
-  top: 2%;
-  right: 2%;
-  border: 1px solid black;
+  justify-content: end;
   text-decoration: none;
+  padding: 15px 25px 0px 0px;
+  /* border: 1px solid black; */
+  /* font-weight: 300; */
+}
+.final-create-quiz-btn .create-quiz-btn {
+  display: flex;
+  gap: 12px;
+  align-items: center;
   padding: 8px 25px;
-  border-radius: 7px;
+  border-radius: 5px;
   color: #fff;
   box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.15);
   background: linear-gradient(180deg, #3d3d3d 0%, #1a1a1a 100%);
-  font-weight: 300;
 }
 .final-create-quiz-btn:hover {
   color: #fff;

@@ -19,10 +19,12 @@ const Quiz = () => {
   }, [dispatch]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(10);
 
   const totalPages = Math.ceil(quizzes.length / itemsPerPage);
-  const activeQuizzes = quizzes.filter((quiz) => quiz.status === 'Active').length;
+  const activeQuizzes = quizzes.filter(
+    (quiz) => quiz.status === "Active"
+  ).length;
 
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
@@ -51,7 +53,10 @@ const Quiz = () => {
     <>
       <div>
         <Link to="create-quizzes" className="final-create-quiz-btn">
-          <IoAddCircleOutline /> Create Quiz
+          <div className="create-quiz-btn">
+            <IoAddCircleOutline />
+            <span>Create Quiz</span>
+          </div>
         </Link>
         <div className="card-grid">
           <QuizCard

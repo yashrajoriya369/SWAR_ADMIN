@@ -2,6 +2,7 @@ import React, { useMemo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { AiOutlineDelete } from "react-icons/ai";
+import { FaRegEye } from "react-icons/fa";
 
 const QuizTable = ({ quizzes, currentPage, itemsPerPage, onDelete }) => {
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -34,14 +35,15 @@ const QuizTable = ({ quizzes, currentPage, itemsPerPage, onDelete }) => {
             <td>{quiz.quizName}</td>
             <td>{quiz.attemptType}</td>
             <td>
-              <span className={`status ${quiz.status.toLowerCase()}`}>
-                {quiz.status}
+              <span className={`status ${quiz.runtimeStatus.toLowerCase()}`}>
+                {quiz.runtimeStatus}
               </span>
             </td>
             <td>{new Date(quiz.startTime).toLocaleString()}</td>
             <td>{new Date(quiz.endTime).toLocaleString()}</td>
             <td>{quiz.durationMinutes}</td>
             <td>
+              <FaRegEye className="action-btn show-icon" />
               <Link to={`update-quizzes/${quiz._id}`}>
                 <CiEdit className="action-btn edit-icon" />
               </Link>
