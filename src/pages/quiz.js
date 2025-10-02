@@ -23,7 +23,7 @@ const Quiz = () => {
 
   const totalPages = Math.ceil(quizzes.length / itemsPerPage);
   const activeQuizzes = quizzes.filter(
-    (quiz) => quiz.status === "Active"
+    (quiz) => quiz.runtimeStatus === "Running"
   ).length;
 
   const pageNumbers = [];
