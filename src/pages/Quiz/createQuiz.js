@@ -14,7 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const quizSchema = Yup.object().shape({
   quizName: Yup.string().required("Quiz name is required"),
   subjectId: Yup.string().required("Subject ID is required"),
-  attemptType: Yup.string().oneOf(["Single", "Multiple"]),
+  attemptType: Yup.string().oneOf(["Single", "Multiple"]).required(),
   startTime: Yup.string().required("Start time is required"),
   endTime: Yup.string()
     .required("End time is required")
@@ -34,13 +34,39 @@ const quizSchema = Yup.object().shape({
     .of(
       Yup.object().shape({
         questionText: Yup.string().required("Question text is required"),
-        questionType: Yup.string().oneOf(["Multiple Choice", "True/False"]),
-        marks: Yup.number().min(1).required("Marks are required"),
-        options: Yup.array().when("questionType", ([type], schema) => {
-          type === "Multiple Choice" ? schema.min(2) : schema.length(2);
+        questionType: Yup.string()
+          .oneOf(["Multiple Choice", "True/False"])
+          .required("Question type required"),
+        marks: Yup.number()
+          .min(1, "Marks must be at least 1")
+          .required("Marks are required"),
+        options: Yup.array().when("questionType", {
+          is: "Multiple Choice",
+          then: () =>
+            Yup.array()
+              .of(Yup.string().trim().required("Option cannot be empty"))
+              .min(2, "At least 2 options are required")
+              .required("Options are required for multiple choice"),
+          otherwise: () => Yup.array().notRequired().nullable(),
         }),
-
-        correctAnswer: Yup.string().required("Correct answer is required"),
+        correctAnswer: Yup.string()
+          .required("Correct answer is required")
+          .test(
+            "correct-answer-valid",
+            "Correct answer must match options (for MC) or be True/False",
+            function (value) {
+              const { questionType, options } = this.parent;
+              if (questionType === "Multiple Choice") {
+                return Array.isArray(options) && options.includes(value);
+              }
+              if (questionType === "True/False") {
+                return ["true", "false", "True", "False"].includes(
+                  String(value)
+                );
+              }
+              return true;
+            }
+          ),
       })
     )
     .min(1, "At least one question is required"),
