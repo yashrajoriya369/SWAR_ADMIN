@@ -52,7 +52,7 @@ const Quiz = () => {
   return (
     <>
       <div>
-        <Link to="create-quizzes" className="final-create-quiz-btn">
+        <Link to="create" className="final-create-quiz-btn">
           <div className="create-quiz-btn">
             <IoAddCircleOutline />
             <span>Create Quiz</span>

@@ -21,7 +21,6 @@ const QuizTable = ({ quizzes, currentPage, itemsPerPage, onDelete }) => {
           <th>SubjectId</th>
           <th>Quiz Name</th>
           <th>Attempt Type</th>
-          <th>Status</th>
           <th>Available From</th>
           <th>Available To</th>
           <th>Duration</th>
@@ -34,17 +33,12 @@ const QuizTable = ({ quizzes, currentPage, itemsPerPage, onDelete }) => {
             <td>{quiz.subjectId}</td>
             <td>{quiz.quizName}</td>
             <td>{quiz.attemptType}</td>
-            <td>
-              <span className={`status ${quiz.runtimeStatus.toLowerCase()}`}>
-                {quiz.runtimeStatus}
-              </span>
-            </td>
             <td>{new Date(quiz.startTime).toLocaleString()}</td>
             <td>{new Date(quiz.endTime).toLocaleString()}</td>
             <td>{quiz.durationMinutes}</td>
             <td>
               <FaRegEye className="action-btn show-icon" />
-              <Link to={`update-quizzes/${quiz._id}`}>
+              <Link to={`edit/${quiz._id}`}>
                 <CiEdit className="action-btn edit-icon" />
               </Link>
               <button
