@@ -6,13 +6,14 @@ import MainLayout from "./component/MainLayout";
 
 // Pages
 import Dashboard from "./pages/dashboard";
-import Login from "./pages/login";
+import Login from "./pages/Login/login";
 import Profile from "./pages/profile";
 import Users from "./pages/users";
 import ManageContent from "./pages/manageContent";
 import ManageQuizzes from "./pages/quiz";
 import QuizForm from "./pages/Quiz/createQuiz";
 import Report from "./pages/report";
+import SignUp from "./pages/Login/signup";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <Routes>
         {/* 🔹 Public Routes */}
         <Route path="/" element={<Login />} />
+        <Route path="create-account" element={<SignUp />} />
 
         {/* 🔹 Protected Admin Routes */}
         <Route path="admin" element={<MainLayout />}>

@@ -1,9 +1,8 @@
-import axios from "axios";
-import { API_BASE } from "../../utils/base_url";
+import axios from "../../utils/axiosConfig";
 
 const create = async (quizData) => {
   try {
-    const response = await axios.post(`${API_BASE}quizzes/`, quizData);
+    const response = await axios.post(`quizzes/`, quizData);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -14,7 +13,7 @@ const create = async (quizData) => {
 
 const getAllQuiz = async () => {
   try {
-    const response = await axios.get(`${API_BASE}quizzes/`);
+    const response = await axios.get(`quizzes/`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -27,7 +26,7 @@ const getAllQuiz = async () => {
 
 const getAQuiz = async (id) => {
   try {
-    const response = await axios.get(`${API_BASE}quizzes/${id}`);
+    const response = await axios.get(`quizzes/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -38,7 +37,7 @@ const getAQuiz = async (id) => {
 
 const deleteQuiz = async (id) => {
   try {
-    const response = await axios.delete(`${API_BASE}quizzes/${id}`);
+    const response = await axios.delete(`quizzes/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -49,7 +48,7 @@ const deleteQuiz = async (id) => {
 
 const updateQuiz = async (quizId, quizData) => {
   try {
-    const response = await axios.put(`${API_BASE}quizzes/${quizId}`, quizData);
+    const response = await axios.put(`quizzes/${quizId}`, quizData);
     return response.data;
   } catch (error) {
     throw new Error(
